@@ -3,14 +3,14 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import lightTheme from "./themes/light"
 import darkTheme from "./themes/dark"
 
-const GlobalStyle = createGlobalStyle `
+const GlobalStyle = createGlobalStyle`
   html {background: ${props => props.theme.colors.background}}
 `;
 
-const AppContainer = styled.div `
+const AppContainer = styled.div`
 `;
 
-const Button = styled.button `
+const Button = styled.button`
 `;
 
 const App = () => {
