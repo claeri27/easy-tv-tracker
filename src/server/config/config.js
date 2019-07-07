@@ -15,7 +15,6 @@ module.exports = {
       freezeTableName: true,
     },
     seederStorage: 'sequelize',
-    operatorsAliases: sequelize.Op,
   },
   stage: {
     username: process.env.DB_USERNAME,
@@ -29,7 +28,6 @@ module.exports = {
       freezeTableName: true,
     },
     seederStorage: 'sequelize',
-    operatorsAliases: sequelize.Op,
   },
   prod: {
     username: process.env.DB_USERNAME,
@@ -43,6 +41,5 @@ module.exports = {
       freezeTableName: true,
     },
     seederStorage: 'sequelize',
-    operatorsAliases: sequelize.Op,
   },
 }
