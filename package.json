@@ -18,14 +18,15 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "sequelize": "^5.9.4",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "server": "nodemon ./src/server/server.js",
-    "db:start": "cd ./src/server && sequelize db:migrate",
-    "db:undo": "cd ./src/server && sequelize db:migrate:undo",
-    "db:undo:all": "cd ./src/server && sequelize db:migrate:undo:all",
+    "db:start": "cd ./src/server && sequelize db:migrate && sequelize db:seed:all",
+    "db:undo": "cd ./src/server && sequelize db:migrate:undo:all",
+    "db:undo:one": "cd ./src/server && sequelize db:migrate:undo",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"

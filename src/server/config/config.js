@@ -1,7 +1,5 @@
 require('dotenv').config()
 
-const sequelize = require('sequelize')
-
 module.exports = {
   dev: {
     username: process.env.DB_USERNAME,
