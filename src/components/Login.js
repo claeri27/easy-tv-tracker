@@ -15,7 +15,7 @@ const FormContainer = styled.form`
   flex-direction: column;
 `;
 
-const UsernameContainer = styled.label`
+const UsernameLabel = styled.label`
 `;
 
 const UsernameInput = styled.input`
@@ -23,7 +23,7 @@ const UsernameInput = styled.input`
   margin: 2px;
 `;
 
-const PasswordContainer = styled.label`
+const PasswordLabel = styled.label`
 `;
 
 const PasswordInput = styled.input`
@@ -53,15 +53,15 @@ const Login = () => {
 
   return <LoginContainer>
     <FormContainer>
-      <UsernameContainer>
+      <UsernameLabel>
         Username: {` `}
         <UsernameInput type="text" name="username" value={username}/>
-      </UsernameContainer>
+      </UsernameLabel>
       <br></br>
-      <PasswordContainer>
+      <PasswordLabel>
         Password: {` `}
         <PasswordInput type="text" name="password" value={password}/>
-      </PasswordContainer>
+      </PasswordLabel>
       <br></br>
       <SubmitButton type="submit">LOGIN</SubmitButton>
     </FormContainer>
