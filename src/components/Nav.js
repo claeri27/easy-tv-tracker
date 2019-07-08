@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { Link } from 'react-router-dom'
 import lightTheme from "../themes/light"
 import darkTheme from "../themes/dark"
 
@@ -36,17 +37,23 @@ const Nav = () => {
   const [lightMode, setLightMode] = useState(stored === "true" ? true : false);
 
   return <ThemeProvider theme={lightMode === false ? darkTheme : lightTheme}>
-    <NavContainer>
-      <GlobalStyle />
-      <TitleContainer>EzTvT</TitleContainer>
-      <ButtonsContainer>
-        <Button onClick={() => {
-          setLightMode(!lightMode);
-          localStorage.setItem("lightMode", !lightMode);
-        }}>Theme</Button>
-        <Button>LOGIN</Button>
-        <Button>REGISTER</Button>
-      </ButtonsContainer>
+      <NavContainer>
+        <GlobalStyle />
+        <Link to='/' style={{ textDecoration: 'none', color: 'black'}}>
+          <TitleContainer>EzTvT</TitleContainer>
+        </Link>
+          <ButtonsContainer>
+            <Button onClick={() => {
+              setLightMode(!lightMode);
+              localStorage.setItem("lightMode", !lightMode);
+            }}>Theme</Button>
+            <Link to='/login/'>
+              <Button>LOGIN</Button>
+            </Link>
+            <Link to='/register/'>
+              <Button>REGISTER</Button>
+            </Link>
+          </ButtonsContainer>
       </NavContainer>
   </ThemeProvider>
 }
