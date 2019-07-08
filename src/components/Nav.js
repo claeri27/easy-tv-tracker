@@ -19,6 +19,7 @@ const NavContainer = styled.div`
 
 const TitleContainer = styled.h1`
   margin-left: 10px;
+  user-select: none;
 `;
 
 const ButtonsContainer = styled.div`

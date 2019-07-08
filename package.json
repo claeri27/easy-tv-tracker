@@ -23,8 +23,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "server": "nodemon ./src/server/server.js",
-    "db:start": "cd ./src/server && sequelize db:migrate && sequelize db:seed:all",
-    "db:undo": "cd ./src/server && sequelize db:migrate:undo:all",
+    "db:start": "cd ./src/server && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:undo": "cd ./src/server && npx sequelize-cli db:seed:undo:all && npx sequelize-cli db:migrate:undo:all",
     "db:undo:one": "cd ./src/server && sequelize db:migrate:undo",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
