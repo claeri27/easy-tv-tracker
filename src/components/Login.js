@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
 
+const BASE_URL = 'http://localhost:3001'
+
 const LoginContainer = styled.div`
   display: flex;
   align-items: center;
@@ -43,8 +45,6 @@ const SubmitButton = styled.button`
   }
 `;
 
-const BASE_URL = 'http://localhost:3000'
-
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -59,8 +59,12 @@ const Login = () => {
     setPassword(e.target.value)
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
+    await axios.post(`${BASE_URL}/login`, {
+      username,
+      password,
+    })
   }
 
   return <LoginContainer>
