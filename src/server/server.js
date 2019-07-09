@@ -10,7 +10,9 @@ const sign = payload => jwt.sign(payload, SECRET)
 const SECRET = "THIS IS THE TEST TOKEN"
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
-const User = require('./models/User.js')
+
+const models = require('./models/index.js')
+const { userRouter } = require('./routes/user-route')
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -19,7 +21,7 @@ const opts = {
 
 module.exports = passport.use(new JwtStrategy(opts, async (payload, done) => {
   try {
-    const user = await User.findByPk(payload.id)
+    const user = await models.User.findByPk(payload.id)
     return done(null, user)
   } catch (e) {
     return done(e, false)
@@ -42,7 +44,8 @@ app.get('/healthcheck', (req, res) => res.status(200).json({status: 'healthy'}))
 
 app.post('/register', async (req, res) => {
   try {
-    const user = await User.create(req.body)
+    console.log(req.body);
+    const user = await models.User.create(req.body)
     const {id, username, email} = user.dataValues
     const token = sign({id, username, email})
     res.json({user, token})
@@ -54,7 +57,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   try {
-    const user = await User.findOne({
+    const user = await models.User.findOne({
       where: {
         username: req.body.username
       }
@@ -72,6 +75,8 @@ app.post('/login', async (req, res) => {
     res.status(500).json({msg: e.message})
   }
 })
+
+app.use('/users', userRouter)
 
 app.listen(PORT, () => {
   console.log(chalk.green.bold(`App has opened on port ${PORT}`))
