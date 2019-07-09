@@ -51,16 +51,24 @@ const Login = () => {
   // const [token, setToken] = useState('');
   // const [logged, setLogged] = useState(false);
 
+  const handleUsernameChange = e => {
+    setUsername(e.target.value)
+  }
+
+  const handlePasswordChange = e => {
+    setPassword(e.target.value)
+  }
+
   return <LoginContainer>
     <FormContainer>
       <UsernameLabel>
         Username: {` `}
-        <UsernameInput type="text" name="username" value={username}/>
+        <UsernameInput type="text" name="username" value={username} onChange={handleUsernameChange} />
       </UsernameLabel>
       <br></br>
       <PasswordLabel>
         Password: {` `}
-        <PasswordInput type="text" name="password" value={password}/>
+        <PasswordInput type="text" name="password" value={password} onChange={handlePasswordChange} />
       </PasswordLabel>
       <br></br>
       <SubmitButton type="submit">LOGIN</SubmitButton>

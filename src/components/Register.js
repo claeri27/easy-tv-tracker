@@ -60,21 +60,33 @@ const Register = () => {
   // const [token, setToken] = useState('');
   // const [logged, setLogged] = useState(false);
 
+  const handleEmailChange = e => {
+    setEmail(e.target.value)
+  }
+
+  const handleUsernameChange = e => {
+    setUsername(e.target.value)
+  }
+
+  const handlePasswordChange = e => {
+    setPassword(e.target.value)
+  }
+
   return <RegisterContainer>
     <FormContainer>
       <EmailLabel>
         E-mail: {` `}
-        <EmailInput type="email" name="email" value={email} />
+        <EmailInput type="email" name="email" value={email} onChange={handleEmailChange} />
       </EmailLabel>
       <br></br>
       <UsernameLabel>
         Username: {` `}
-        <UsernameInput type="text" name="username" value={username} />
+        <UsernameInput type="text" name="username" value={username} onChange={handleUsernameChange} />
       </UsernameLabel>
       <br></br>
       <PasswordLabel>
         Password: {` `}
-        <PasswordInput type="text" name="password" value={password} />
+        <PasswordInput type="text" name="password" value={password} onChange={handlePasswordChange} />
       </PasswordLabel>
       <br></br>
       <SubmitButton type="submit">REGISTER</SubmitButton>
