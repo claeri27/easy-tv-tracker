@@ -21,7 +21,7 @@ userRouter.get('/', async (req, res) => {
 
 userRouter.get('/:id', async (req, res) => {
   try {
-    const user = await models.User.findByPk(req.params.id, {
+    const user = await models.User.findByPk(req.body.id, {
       attributes: {
         exclude: ['password']
       },
@@ -35,7 +35,7 @@ userRouter.get('/:id', async (req, res) => {
 
 userRouter.delete('/:id', async (req, res) => {
   try {
-    const user = await models.User.findByPk(req.params.id)
+    const user = await models.User.findByPk(req.body.id)
     await user.destroy()
     res.json({user})
   } catch (e) {
@@ -46,9 +46,9 @@ userRouter.delete('/:id', async (req, res) => {
 
 userRouter.put('/:id', async (req, res) => {
   try {
-    const user = await models.User.findByPk(req.params.id)
+    const user = await models.User.findByPk(req.body.id)
     await user.update(req.body)
-    const updatedUser = await models.User.findByPk(req.params.id)
+    const updatedUser = await models.User.findByPk(req.body.id)
     res.json({updatedUser})
   } catch (e) {
     res.status(404).json({e: 'Server couldn\'t process request to UPDATE user - User may not exist'})

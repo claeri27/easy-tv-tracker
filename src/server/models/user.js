@@ -30,7 +30,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.DATE
     }
-  }, {});
+  }, {
+    paranoid: true,
+  });
 
   User.beforeCreate(async user => {
     const password_digest = await bcrypt.hash(user.password, 10)
