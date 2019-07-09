@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
 
@@ -72,8 +72,12 @@ const Register = () => {
     setPassword(e.target.value)
   }
 
+  const handleSubmit = async e => {
+    e.preventDefault()
+  }
+
   return <RegisterContainer>
-    <FormContainer>
+    <FormContainer onSubmit={handleSubmit}>
       <EmailLabel>
         E-mail: {` `}
         <EmailInput type="email" name="email" value={email} onChange={handleEmailChange} />

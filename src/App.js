@@ -14,8 +14,8 @@ const App = () => {
     <AppContainer>
       <Nav />
       <Route exact path="/" component={Home} />
-      <Route path="/login/" component={Login} />
-      <Route path="/register/" component={Register} />
+      <Route path="/log/" component={Login} />
+      <Route path="/reg/" component={Register} />
     </AppContainer> 
   </Router>
 }

@@ -6,12 +6,14 @@ module.exports = {
       {
         id: uuidv4(),
         userName: 'claeri27',
+        password: 'bilbo',
         email: 'claeri27@gmail.com',
         createdAt: Sequelize.literal('NOW()'),
         updatedAt: Sequelize.literal('NOW()')
       },{
         id: uuidv4(),
         userName: 'bobojenkins',
+        password: 'bobodagreatest',
         email: 'bobo@gmail.com',
         createdAt: Sequelize.literal('NOW()'),
         updatedAt: Sequelize.literal('NOW()')

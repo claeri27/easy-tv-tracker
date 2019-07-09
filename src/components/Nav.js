@@ -47,10 +47,10 @@ const Nav = () => {
               setLightMode(!lightMode);
               localStorage.setItem("lightMode", !lightMode);
             }}>Theme</Button>
-            <Link to='/login/'>
+            <Link to='/log/'>
               <Button>LOGIN</Button>
             </Link>
-            <Link to='/register/'>
+            <Link to='/reg/'>
               <Button>REGISTER</Button>
             </Link>
           </ButtonsContainer>

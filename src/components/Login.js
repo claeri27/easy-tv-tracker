@@ -59,8 +59,12 @@ const Login = () => {
     setPassword(e.target.value)
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+  }
+
   return <LoginContainer>
-    <FormContainer>
+    <FormContainer onSubmit={handleSubmit}>
       <UsernameLabel>
         Username: {` `}
         <UsernameInput type="text" name="username" value={username} onChange={handleUsernameChange} />
