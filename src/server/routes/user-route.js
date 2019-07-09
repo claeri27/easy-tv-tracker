@@ -48,8 +48,10 @@ userRouter.delete('/:id', async (req, res) => {
 userRouter.put('/:id', async (req, res) => {
   try {
     const user = await models.User.findByPk(req.body.id)
-    const password_digest = await bcrypt.hash(req.body.password, 10)
-    req.body.password = password_digest
+    if (req.body.password) {
+      const password_digest = await bcrypt.hash(req.body.password, 10)
+      req.body.password = password_digest
+    }
     await user.update(req.body)
     const updatedUser = await models.User.findByPk(req.body.id)
     res.json({updatedUser})

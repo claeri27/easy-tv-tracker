@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components';
 
@@ -51,7 +51,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'http://localhost:3001'
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -74,6 +74,11 @@ const Register = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+    await axios.post(`${BASE_URL}/register`, {
+      email,
+      username,
+      password,
+    })
   }
 
   return <RegisterContainer>
