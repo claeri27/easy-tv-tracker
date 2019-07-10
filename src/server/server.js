@@ -68,7 +68,7 @@ app.post('/login', async (req, res) => {
       const token = sign({id, username})
       res.json({user, token})
     } else {
-      res.json({msg: "invalid login"})
+      res.json({msg: "Invalid password"})
     }
   } catch (e) {
     console.log(e);

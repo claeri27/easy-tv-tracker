@@ -45,12 +45,10 @@ const SubmitButton = styled.button`
   }
 `;
 
-const Login = () => {
+const Login = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [token, setToken] = useState('');
-  // const [logged, setLogged] = useState(false);
-
+  
   const handleUsernameChange = e => {
     setUsername(e.target.value)
   }
@@ -61,10 +59,16 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    await axios.post(`${BASE_URL}/login`, {
+    const resp = await axios.post(`${BASE_URL}/login`, {
       username,
       password,
     })
+    if (!resp.data.token) {
+      alert(resp.data.msg)
+    } else {
+      localStorage.setItem('token', resp.data.token)
+      props.handleLogged(true)
+    }
   }
 
   return <LoginContainer>
@@ -76,7 +80,7 @@ const Login = () => {
       <br></br>
       <PasswordLabel>
         Password: {` `}
-        <PasswordInput type="text" name="password" value={password} onChange={handlePasswordChange} />
+        <PasswordInput type="password" name="password" value={password} onChange={handlePasswordChange} />
       </PasswordLabel>
       <br></br>
       <SubmitButton type="submit">LOGIN</SubmitButton>

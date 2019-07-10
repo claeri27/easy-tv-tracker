@@ -32,9 +32,37 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Nav = () => {
+const Nav = props => {
+  const token = localStorage.getItem('token')
   const stored = localStorage.getItem("lightMode")
   const [lightMode, setLightMode] = useState(stored === "true" ? true : false);
+
+  const LoggedOutButtons = () => {
+    return <ButtonsContainer>
+      <Button onClick={() => {
+        setLightMode(!lightMode);
+        localStorage.setItem("lightMode", !lightMode);
+      }}>Theme</Button>
+      <Link to='/login/'>
+        <Button>LOGIN</Button>
+      </Link>
+      <Link to='/register/'>
+        <Button>REGISTER</Button>
+      </Link>
+    </ButtonsContainer>
+  }
+
+  const LoggedInButtons = () => {
+    return <ButtonsContainer>
+      <Link to='/user/'>
+        <Button>USERNAME</Button>
+      </Link>
+      <Button onClick={() => {
+        localStorage.clear('token')
+        props.handleLogged(false)
+      }}>LOGOUT</Button>
+    </ButtonsContainer>
+  }
 
   return <ThemeProvider theme={lightMode === false ? darkTheme : lightTheme}>
       <NavContainer>
@@ -42,18 +70,7 @@ const Nav = () => {
         <Link to='/' style={{ textDecoration: 'none', color: 'black'}}>
           <TitleContainer>EzTvT</TitleContainer>
         </Link>
-          <ButtonsContainer>
-            <Button onClick={() => {
-              setLightMode(!lightMode);
-              localStorage.setItem("lightMode", !lightMode);
-            }}>Theme</Button>
-            <Link to='/login/'>
-              <Button>LOGIN</Button>
-            </Link>
-            <Link to='/register/'>
-              <Button>REGISTER</Button>
-            </Link>
-          </ButtonsContainer>
+        {token ? LoggedInButtons() : LoggedOutButtons()}
       </NavContainer>
   </ThemeProvider>
 }
