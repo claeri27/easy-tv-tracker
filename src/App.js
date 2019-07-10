@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import jwtDecode from 'jwt-decode'
 import Nav from "./components/Nav"
 import Login from "./components/Login"
 import Register from "./components/Register"
@@ -14,13 +15,15 @@ const LocalClearButton = styled.button``
 const RouteContainer = styled.div``
 
 const App = () => {
-  const [logged, setLogged] = useState(false);
+  const [decoded, setDecoded] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [redirectInfo, setRedirectInfo] = useState('/');
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    if(token) setLogged(true)
+    if(token) {
+      setDecoded(jwtDecode(token))
+    }
   }, [token])
 
   const renderRedirect = useCallback(() => {
@@ -31,10 +34,6 @@ const App = () => {
     renderRedirect()
     setRedirect(false)
   }, [redirect, renderRedirect])
-
-  const handleLogged = newValue => {
-    setLogged(newValue)
-  }
 
   const handleRedirect = () => {
     setRedirect(true)
@@ -48,32 +47,29 @@ const App = () => {
       {renderRedirect()}
       <AppContainer>
         <Nav 
-          handleLogged={handleLogged}
+          decoded={decoded}
           handleRedirect={handleRedirect} 
           handleRedirectInfo={handleRedirectInfo}
         />
         <TestButton onClick={() => {
-          console.log('TOKEN: ', localStorage.getItem('token'), 'LOGGED?: ', logged);
+          console.log('TOKEN: ', localStorage.getItem('token'));
         }}>TEST</TestButton>
         <LocalClearButton onClick={() => {
-          localStorage.clear('token', 'username')
-          setLogged(false)
+          localStorage.clear('token')
         }}>CLEAR LOCAL</LocalClearButton>
         <RouteContainer>
-          <Route exact path="/" component={Welcome} />
-          <Route path="/home/" component={Home} />
+          <Route exact path="/" component={token ? Home : Welcome} />
+          {/* <Route path="/home/" component={Home} /> */}
           <Route 
             path="/login/"
             render={() => 
               <Login 
-                handleLogged={handleLogged} 
                 handleRedirect={handleRedirect} 
                 handleRedirectInfo={handleRedirectInfo} />}/>
           <Route 
             path="/register/" 
             render={() =>
               <Register
-                handleLogged={handleLogged}
                 handleRedirect={handleRedirect}
                 handleRedirectInfo={handleRedirectInfo} />}/>
           <Route path="/user/" component={UserProfile} />

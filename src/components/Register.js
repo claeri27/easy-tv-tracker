@@ -79,8 +79,7 @@ const Register = props => {
     })
     localStorage.setItem('token', resp.data.token)
     localStorage.setItem('username', resp.data.user.username)
-    props.handleLogged()
-    props.handleRedirectInfo('/home')
+    props.handleRedirectInfo(() => '/')
     props.handleRedirect()
   }
 
