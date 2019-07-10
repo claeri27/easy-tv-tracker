@@ -56,7 +56,7 @@ const App = () => {
           console.log('TOKEN: ', localStorage.getItem('token'), 'LOGGED?: ', logged);
         }}>TEST</TestButton>
         <LocalClearButton onClick={() => {
-          localStorage.clear()
+          localStorage.clear('token', 'username')
           setLogged(false)
         }}>CLEAR LOCAL</LocalClearButton>
         <RouteContainer>
@@ -66,11 +66,16 @@ const App = () => {
             path="/login/"
             render={() => 
               <Login 
-                logged={logged} 
                 handleLogged={handleLogged} 
                 handleRedirect={handleRedirect} 
                 handleRedirectInfo={handleRedirectInfo} />}/>
-          <Route path="/register/" component={Register} />
+          <Route 
+            path="/register/" 
+            render={() =>
+              <Register
+                handleLogged={handleLogged}
+                handleRedirect={handleRedirect}
+                handleRedirectInfo={handleRedirectInfo} />}/>
           <Route path="/user/" component={UserProfile} />
         </RouteContainer>
       </AppContainer> 

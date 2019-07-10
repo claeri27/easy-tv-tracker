@@ -53,12 +53,10 @@ const SubmitButton = styled.button`
 
 const BASE_URL = 'http://localhost:3001'
 
-const Register = () => {
+const Register = props => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [token, setToken] = useState('');
-  // const [logged, setLogged] = useState(false);
 
   const handleEmailChange = e => {
     setEmail(e.target.value)
@@ -74,11 +72,16 @@ const Register = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    await axios.post(`${BASE_URL}/register`, {
+    const resp = await axios.post(`${BASE_URL}/register`, {
       email,
       username,
       password,
     })
+    localStorage.setItem('token', resp.data.token)
+    localStorage.setItem('username', resp.data.user.username)
+    props.handleLogged()
+    props.handleRedirectInfo('/home')
+    props.handleRedirect()
   }
 
   return <RegisterContainer>
