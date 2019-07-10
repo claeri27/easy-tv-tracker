@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import Nav from "./components/Nav"
 import Login from "./components/Login"
 import Register from "./components/Register"
@@ -15,19 +15,43 @@ const RouteContainer = styled.div``
 
 const App = () => {
   const [logged, setLogged] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [redirectInfo, setRedirectInfo] = useState('/');
   const token = localStorage.getItem('token')
 
   useEffect(() => {
     if(token) setLogged(true)
   }, [token])
-  
+
+  const renderRedirect = useCallback(() => {
+    if (redirect) return <Redirect to={redirectInfo} />
+  }, [redirect, redirectInfo])
+
+  useEffect(() => {
+    renderRedirect()
+    setRedirect(false)
+  }, [redirect, renderRedirect])
+
   const handleLogged = newValue => {
     setLogged(newValue)
   }
 
+  const handleRedirect = () => {
+    setRedirect(true)
+  }
+
+  const handleRedirectInfo = newValue => {
+    setRedirectInfo(newValue)
+  }
+
   return <Router>
+      {renderRedirect()}
       <AppContainer>
-        <Nav handleLogged={handleLogged} />
+        <Nav 
+          handleLogged={handleLogged}
+          handleRedirect={handleRedirect} 
+          handleRedirectInfo={handleRedirectInfo}
+        />
         <TestButton onClick={() => {
           console.log('TOKEN: ', localStorage.getItem('token'), 'LOGGED?: ', logged);
         }}>TEST</TestButton>
@@ -41,9 +65,11 @@ const App = () => {
           <Route 
             path="/login/"
             render={() => 
-              <Login logged={logged} handleLogged={handleLogged} />
-            } 
-          />
+              <Login 
+                logged={logged} 
+                handleLogged={handleLogged} 
+                handleRedirect={handleRedirect} 
+                handleRedirectInfo={handleRedirectInfo} />}/>
           <Route path="/register/" component={Register} />
           <Route path="/user/" component={UserProfile} />
         </RouteContainer>

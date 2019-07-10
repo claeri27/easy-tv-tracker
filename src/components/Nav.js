@@ -55,11 +55,13 @@ const Nav = props => {
   const LoggedInButtons = () => {
     return <ButtonsContainer>
       <Link to='/user/'>
-        <Button>USERNAME</Button>
+        <Button>{localStorage.getItem('username')}</Button>
       </Link>
       <Button onClick={() => {
-        localStorage.clear('token')
+        localStorage.clear('token', 'username')
         props.handleLogged(false)
+        props.handleRedirectInfo('/')
+        props.handleRedirect()
       }}>LOGOUT</Button>
     </ButtonsContainer>
   }
@@ -67,7 +69,7 @@ const Nav = props => {
   return <ThemeProvider theme={lightMode === false ? darkTheme : lightTheme}>
       <NavContainer>
         <GlobalStyle />
-        <Link to='/' style={{ textDecoration: 'none', color: 'black'}}>
+        <Link to={token ? '/home' : '/'} style={{ textDecoration: 'none', color: 'black'}}>
           <TitleContainer>EzTvT</TitleContainer>
         </Link>
         {token ? LoggedInButtons() : LoggedOutButtons()}

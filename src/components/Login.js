@@ -48,7 +48,7 @@ const SubmitButton = styled.button`
 const Login = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const handleUsernameChange = e => {
     setUsername(e.target.value)
   }
@@ -59,15 +59,15 @@ const Login = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const resp = await axios.post(`${BASE_URL}/login`, {
-      username,
-      password,
-    })
+    const resp = await axios.post(`${BASE_URL}/login`, { username, password })
     if (!resp.data.token) {
       alert(resp.data.msg)
     } else {
       localStorage.setItem('token', resp.data.token)
-      props.handleLogged(true)
+      localStorage.setItem('username', resp.data.user.username)
+      props.handleLogged()
+      props.handleRedirectInfo('/home')
+      props.handleRedirect()
     }
   }
 
