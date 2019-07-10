@@ -62,6 +62,7 @@ app.post('/login', async (req, res) => {
         username: req.body.username
       }
     })
+    if (!user) res.json({msg: "Username not found"})
     const isVerified = await bcrypt.compare(req.body.password, user.dataValues.password)
     if (isVerified) {
       const {id, username} = user.dataValues
