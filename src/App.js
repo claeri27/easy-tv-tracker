@@ -59,7 +59,6 @@ const App = () => {
         }}>CLEAR LOCAL</LocalClearButton>
         <RouteContainer>
           <Route exact path="/" component={token ? Home : Welcome} />
-          {/* <Route path="/home/" component={Home} /> */}
           <Route 
             path="/login/"
             render={() => 

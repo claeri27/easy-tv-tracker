@@ -3,16 +3,21 @@ import styled from 'styled-components';
 
 const WelcomeContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   background: grey;
   min-height: 500px;
-  font-size: 3em;
+`;
+
+const Header = styled.h3`
+`;
+
+const ShowsContainer = styled.div`
 `;
 
 const Welcome = () => {
   return <WelcomeContainer>
-    Welcome
+    <Header>Keep track of all your favorite TV shows!</Header>
+    <ShowsContainer>
+    </ShowsContainer>
   </WelcomeContainer>
 }
 

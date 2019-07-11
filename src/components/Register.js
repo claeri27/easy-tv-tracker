@@ -15,14 +15,9 @@ const FormContainer = styled.form`
   flex-direction: column;
 `;
 
-const EmailLabel = styled.label`
-`;
-
-const UsernameLabel = styled.label`
-`;
-
-const PasswordLabel = styled.label`
-`;
+const EmailLabel = styled.label``;
+const UsernameLabel = styled.label``;
+const PasswordLabel = styled.label``;
 
 const EmailInput = styled.input`
   padding: 6px;
@@ -78,7 +73,6 @@ const Register = props => {
       password,
     })
     localStorage.setItem('token', resp.data.token)
-    localStorage.setItem('username', resp.data.user.username)
     props.handleRedirectInfo(() => '/')
     props.handleRedirect()
   }

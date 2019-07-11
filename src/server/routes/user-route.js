@@ -7,17 +7,10 @@ const userRouter = express.Router()
 userRouter.use(bodyParser.json())
 
 userRouter.get('/', async (req, res) => {
-  try {
-    const users = await models.User.findAll({
-      attributes: {
-        exclude: ['password']
-      }
-    })
-    res.json({users})
-  } catch (e) {
-    console.log('Server couldn\'t GET users', e);
-    res.sendStatus(404)
-  }
+  const users = await models.User.findAll({
+    attributes: {exclude: ['password']}
+  })
+  res.json({users})
 })
 
 userRouter.get('/:id', async (req, res) => {
