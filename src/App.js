@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import React, { useState, useEffect, useCallback } from 'react'
+import styled from 'styled-components'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
-import Nav from "./components/Nav"
-import Login from "./components/Login"
-import Register from "./components/Register"
-import Home from "./components/Home"
-import Welcome from "./components/Welcome"
-import UserProfile from "./components/UserProfile"
+import Nav from './components/Nav'
+import Login from './components/Login'
+import Register from './components/Register'
+import Home from './components/Home'
+import Welcome from './components/Welcome'
+import UserProfile from './components/UserProfile'
 
 const AppContainer = styled.div``
 const TestButton = styled.button``
@@ -15,13 +15,13 @@ const LocalClearButton = styled.button``
 const RouteContainer = styled.div``
 
 const App = () => {
-  const [decoded, setDecoded] = useState('');
-  const [redirect, setRedirect] = useState(false);
-  const [redirectInfo, setRedirectInfo] = useState('/');
+  const [decoded, setDecoded] = useState('')
+  const [redirect, setRedirect] = useState(false)
+  const [redirectInfo, setRedirectInfo] = useState('/')
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    if(token) {
+    if (token) {
       setDecoded(jwtDecode(token))
     }
   }, [token])
@@ -43,38 +43,52 @@ const App = () => {
     setRedirectInfo(newValue)
   }
 
-  return <Router>
+  return (
+    <Router>
       {renderRedirect()}
       <AppContainer>
-        <Nav 
+        <Nav
           decoded={decoded}
-          handleRedirect={handleRedirect} 
+          handleRedirect={handleRedirect}
           handleRedirectInfo={handleRedirectInfo}
         />
-        <TestButton onClick={() => {
-          console.log('TOKEN: ', localStorage.getItem('token'));
-        }}>TEST</TestButton>
-        <LocalClearButton onClick={() => {
-          localStorage.clear('token')
-        }}>CLEAR LOCAL</LocalClearButton>
+        <TestButton
+          onClick={() => {
+            console.log('TOKEN: ', localStorage.getItem('token'))
+          }}>
+          TEST
+        </TestButton>
+        <LocalClearButton
+          onClick={() => {
+            localStorage.clear('token')
+          }}>
+          CLEAR LOCAL
+        </LocalClearButton>
         <RouteContainer>
           <Route exact path="/" component={token ? Home : Welcome} />
-          <Route 
+          <Route
             path="/login/"
-            render={() => 
-              <Login 
-                handleRedirect={handleRedirect} 
-                handleRedirectInfo={handleRedirectInfo} />}/>
-          <Route 
-            path="/register/" 
-            render={() =>
+            render={() => (
+              <Login
+                handleRedirect={handleRedirect}
+                handleRedirectInfo={handleRedirectInfo}
+              />
+            )}
+          />
+          <Route
+            path="/register/"
+            render={() => (
               <Register
                 handleRedirect={handleRedirect}
-                handleRedirectInfo={handleRedirectInfo} />}/>
+                handleRedirectInfo={handleRedirectInfo}
+              />
+            )}
+          />
           <Route path="/user/" component={UserProfile} />
         </RouteContainer>
-      </AppContainer> 
+      </AppContainer>
     </Router>
+  )
 }
 
-export default App;
+export default App

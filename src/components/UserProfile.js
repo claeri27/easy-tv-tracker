@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const UserProfileContainer = styled.div`
   display: flex;
@@ -8,12 +8,10 @@ const UserProfileContainer = styled.div`
   background: grey;
   min-height: 500px;
   font-size: 3em;
-`;
+`
 
 const UserProfile = () => {
-  return <UserProfileContainer>
-    USER PROFILE
-  </UserProfileContainer>
+  return <UserProfileContainer>USER PROFILE</UserProfileContainer>
 }
 
 export default UserProfile

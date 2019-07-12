@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const HomeContainer = styled.div`
   display: flex;
@@ -8,12 +8,10 @@ const HomeContainer = styled.div`
   background: grey;
   min-height: 500px;
   font-size: 3em;
-`;
+`
 
 const Home = () => {
-  return <HomeContainer>
-    HOME
-  </HomeContainer>
+  return <HomeContainer>HOME</HomeContainer>
 }
 
 export default Home

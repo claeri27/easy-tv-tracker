@@ -5,43 +5,43 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       databaseId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       startDate: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       endDate: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       country: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       network: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       imageThumbnailPath: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+        type: Sequelize.DATE,
+      },
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Shows');
-  }
-};
+    return queryInterface.dropTable('Shows')
+  },
+}

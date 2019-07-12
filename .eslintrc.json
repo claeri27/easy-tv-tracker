@@ -1,13 +1,19 @@
 {
     "env": {
         "browser": true,
+        "node": true,
+        "jest": true,
         "es6": true
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:prettier/recommended"
+        "plugin:react/recommended"
     ],
+    "settings": {
+        "react": {
+            "version": "16.8.6"
+        }
+    },
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -16,17 +22,19 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 2017,
         "sourceType": "module"
     },
     "plugins": [
         "react",
         "react-hooks",
-        "prettier",
+        "prettier"
     ],
     "rules": {
         "linebreak-style": ["error", "unix"],
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": 0,
+        "no-unused-vars": ["warn", { "vars": "all", "args": "after-used"}]
     }
 }
