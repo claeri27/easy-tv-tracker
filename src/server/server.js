@@ -13,6 +13,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 
 const models = require('./models/index.js')
 const { userRouter } = require('./routes/user-route')
+const { showRouter } = require('./routes/show-route')
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -78,6 +79,7 @@ app.post('/login', async (req, res) => {
 })
 
 app.use('/users', userRouter)
+app.use('/shows', showRouter)
 
 app.listen(PORT, () => {
   console.log(chalk.green.bold(`App has opened on port ${PORT}`))

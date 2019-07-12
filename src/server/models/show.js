@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Show = sequelize.define('Show', {
+    databaseID: DataTypes.INTEGER,
     name: DataTypes.STRING,
     startDate: DataTypes.STRING,
     endDate: DataTypes.STRING,

@@ -26,7 +26,7 @@ showRouter.delete('/:id', async (req, res) => {
     await show.destroy()
     res.json({show})
   } catch (e) {
-    console.log('Server couldn\t DELETE show', e);
+    console.log('Server couldn\'t DELETE show', e);
     res.sendStatus(404)
   }
 })
