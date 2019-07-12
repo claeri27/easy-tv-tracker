@@ -35,7 +35,7 @@ const Button = styled.button`
 const Nav = props => {
   const token = localStorage.getItem('token')
   const stored = localStorage.getItem('lightMode')
-  const [lightMode, setLightMode] = useState(stored === 'true' ? true : false)
+  const [lightMode, setLightMode] = useState(stored === 'true')
 
   const LoggedOutButtons = () => {
     return (

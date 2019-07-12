@@ -2,13 +2,13 @@ const axios = require('axios')
 
 const getShows = async () => {
   let showList = []
-  for (let page = 1; page <= 80; page++) {
+  for (let page = 1; page <= 5; page++) {
     const { data } = await axios(
-      `https://www.episodate.com/api/most-popular?page=${page}`,
+      `https://www.episodate.com/api/most-popular?page=${page}`
     )
-    const { tv_shows } = data
+    const tvShows = data.tv_shows
     showList = showList.concat(
-      tv_shows.map(
+      tvShows.map(
         ({
           id: databaseId,
           name,
@@ -31,8 +31,8 @@ const getShows = async () => {
             createdAt: new Date(),
             updatedAt: new Date(),
           }
-        },
-      ),
+        }
+      )
     )
     console.log('PAGE: ', page)
   }

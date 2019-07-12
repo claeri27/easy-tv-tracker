@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       status: DataTypes.STRING,
       imageThumbnailPath: DataTypes.STRING,
     },
-    {},
+    {}
   )
-  Show.associate = function(models) {
+  Show.associate = function (models) {
     // associations can be defined here
   }
   return Show

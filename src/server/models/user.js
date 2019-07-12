@@ -35,15 +35,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       paranoid: true,
-    },
+    }
   )
 
   User.beforeCreate(async user => {
-    const password_digest = await bcrypt.hash(user.password, 10)
-    user.password = password_digest
+    const hashedPassword = await bcrypt.hash(user.password, 10)
+    Object.assign(user, { password: hashedPassword })
   })
 
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
   }
 

@@ -42,8 +42,8 @@ userRouter.put('/:id', async (req, res) => {
   try {
     const user = await models.User.findByPk(req.body.id)
     if (req.body.password) {
-      const password_digest = bcrypt.hash(req.body.password, 10)
-      req.body.password = password_digest
+      const hashedPassword = bcrypt.hash(req.body.password, 10)
+      Object.assign(user, { password: hashedPassword })
     }
     await user.update(req.body)
     const updatedUser = await models.User.findByPk(req.body.id)
