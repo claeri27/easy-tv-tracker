@@ -28,7 +28,7 @@ module.exports = passport.use(
     } catch (e) {
       return done(e, false)
     }
-  })
+  }),
 )
 
 const PORT = process.env.SERVER_PORT || 3001
@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/healthcheck', (req, res) =>
-  res.status(200).json({ status: 'healthy' })
+  res.status(200).json({ status: 'healthy' }),
 )
 
 app.post('/register', async (req, res) => {
@@ -70,7 +70,7 @@ app.post('/login', async (req, res) => {
     if (!user) res.json({ msg: 'Username not found' })
     const isVerified = await bcrypt.compare(
       req.body.password,
-      user.dataValues.password
+      user.dataValues.password,
     )
     if (isVerified) {
       const { id, username } = user.dataValues

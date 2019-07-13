@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       paranoid: true,
-    }
+    },
   )
 
   User.beforeCreate(async user => {
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     Object.assign(user, { password: hashedPassword })
   })
 
-  User.associate = function (models) {
+  User.associate = function(models) {
     // associations can be defined here
   }
 

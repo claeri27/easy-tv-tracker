@@ -4,7 +4,7 @@ const getShows = async () => {
   let showList = []
   for (let page = 1; page <= 5; page++) {
     const { data } = await axios(
-      `https://www.episodate.com/api/most-popular?page=${page}`
+      `https://www.episodate.com/api/most-popular?page=${page}`,
     )
     const tvShows = data.tv_shows
     showList = showList.concat(
@@ -31,8 +31,8 @@ const getShows = async () => {
             createdAt: new Date(),
             updatedAt: new Date(),
           }
-        }
-      )
+        },
+      ),
     )
     console.log('PAGE: ', page)
   }
