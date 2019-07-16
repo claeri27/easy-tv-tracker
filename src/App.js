@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { ApolloProvider, Query } from 'react-apollo'
+import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost'
 import client from './client'
 import styled from 'styled-components'
@@ -83,63 +83,61 @@ const App = () => {
   )
 
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        {renderRedirect()}
-        <AppContainer>
-          <Nav
-            decoded={decoded}
-            handleRedirect={handleRedirect}
-            handleRedirectInfo={handleRedirectInfo}
+    <Router>
+      {renderRedirect()}
+      <AppContainer>
+        <Nav
+          decoded={decoded}
+          handleRedirect={handleRedirect}
+          handleRedirectInfo={handleRedirectInfo}
+        />
+        <QueryButton
+          onClick={() => {
+            client
+              .query({
+                query: GetStuff,
+              })
+              .then(console.log)
+          }}>
+          QUERY
+        </QueryButton>
+        <TestButton
+          onClick={() => {
+            console.log('TOKEN: ', localStorage.getItem('token'))
+          }}>
+          TEST
+        </TestButton>
+        <LocalClearButton
+          onClick={() => {
+            localStorage.clear('token')
+          }}>
+          CLEAR LOCAL
+        </LocalClearButton>
+        {showList()}
+        <RouteContainer>
+          <Route exact path="/" component={token ? Home : Welcome} />
+          <Route
+            path="/login/"
+            render={() => (
+              <Login
+                handleRedirect={handleRedirect}
+                handleRedirectInfo={handleRedirectInfo}
+              />
+            )}
           />
-          <QueryButton
-            onClick={() => {
-              client
-                .query({
-                  query: GetStuff,
-                })
-                .then(console.log)
-            }}>
-            QUERY
-          </QueryButton>
-          <TestButton
-            onClick={() => {
-              console.log('TOKEN: ', localStorage.getItem('token'))
-            }}>
-            TEST
-          </TestButton>
-          <LocalClearButton
-            onClick={() => {
-              localStorage.clear('token')
-            }}>
-            CLEAR LOCAL
-          </LocalClearButton>
-          {showList()}
-          <RouteContainer>
-            <Route exact path="/" component={token ? Home : Welcome} />
-            <Route
-              path="/login/"
-              render={() => (
-                <Login
-                  handleRedirect={handleRedirect}
-                  handleRedirectInfo={handleRedirectInfo}
-                />
-              )}
-            />
-            <Route
-              path="/register/"
-              render={() => (
-                <Register
-                  handleRedirect={handleRedirect}
-                  handleRedirectInfo={handleRedirectInfo}
-                />
-              )}
-            />
-            <Route path="/user/" component={UserProfile} />
-          </RouteContainer>
-        </AppContainer>
-      </Router>
-    </ApolloProvider>
+          <Route
+            path="/register/"
+            render={() => (
+              <Register
+                handleRedirect={handleRedirect}
+                handleRedirectInfo={handleRedirectInfo}
+              />
+            )}
+          />
+          <Route path="/user/" component={UserProfile} />
+        </RouteContainer>
+      </AppContainer>
+    </Router>
   )
 }
 
