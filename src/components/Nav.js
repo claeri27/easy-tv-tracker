@@ -73,7 +73,7 @@ const Nav = props => {
         <Button
           onClick={() => {
             localStorage.clear('token')
-            props.handleRedirectInfo('/')
+            props.handleRedirectInfo(() => '/')
             props.handleRedirect()
           }}>
           LOGOUT

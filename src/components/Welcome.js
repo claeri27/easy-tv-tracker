@@ -8,10 +8,7 @@ const WelcomeContainer = styled.div`
 `
 
 const Header = styled.h3``
-
 const ShowsContainer = styled.div``
-
-const TestButton = styled.button``
 
 const Welcome = () => {
   return (
